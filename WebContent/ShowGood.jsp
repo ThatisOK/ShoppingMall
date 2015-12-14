@@ -24,7 +24,7 @@
 <title><%=good.getName()%></title>
 </head>
 <body background="static/img/background.jpg">
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="headerTwo.jsp"/>
 	<div class="row" >
 		<div class="col-md-4">
 		</div>
@@ -65,55 +65,56 @@
 
 </body>
 <script>
-
-	function operation(id, amount){
-		amount = typeof amount !== '' ?  amount : 1;
-		$.ajax({
-			  url: "ShoppingCartServlet",
-			  data: {
-		          id:id ,
-		          amount:amount,
-		          operation:"add"
-		        },
-			  type:'post',
-			  dataType: 'json',
-			  success: function (data) {}
-			  
-			});
-		
-	}
-	$('.mui-amount-increase').click(function() {
-		$(".mui-amount-input").val(function(n, c) {
-			return parseInt(c) + 1;
-		})
-	})
-	$('.mui-amount-decrease').click(function() {
-		$(".mui-amount-input").val(function(n, c) {
-			if (parseInt(c) == 1)
-				return parseInt(c)
-			return parseInt(c) - 1;
-		})
-	})
-	$('#add').click(function() {
-		var amount = $(".mui-amount-input").val();
-		var id = $('#id').val();
-		operation(id, amount);
-		window.location.href = "ViewCart.jsp";
-	})
-	$(".mui-amount-input").keyup(function() {
-		var amount = $(this).val();
-		var reg = /^[0-9]+$/;
-		var regNum = /[^0-9]/g;
-		if (!reg.test(amount) || (amount <= 0)) {
-			$(this).val(function(n, c) {
-				if(amount.replace(regNum, "") != ""){
-					return amount.replace(regNum, "");
-				}
-					
-				return 1;
-			})
+function operation(id, amount) {
+	amount = typeof amount !== '' ? amount : 1;
+	$.ajax({
+		url : "ShoppingCartServlet",
+		data : {
+			id : id,
+			amount : amount,
+			operation : "add"
+		},
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
 		}
 
+	});
+
+}
+$('.mui-amount-increase').click(function() {
+	$(".mui-amount-input").val(function(n, c) {
+		return parseInt(c) + 1;
 	})
+})
+$('.mui-amount-decrease').click(function() {
+	$(".mui-amount-input").val(function(n, c) {
+		if (parseInt(c) == 1)
+			return parseInt(c)
+		return parseInt(c) - 1;
+	})
+})
+$('#add').click(function() {
+	var amount = $(".mui-amount-input").val();
+	var id = $('#id').val();
+	operation(id, amount);
+	window.location.href = "ViewCart.jsp";
+})
+$(".mui-amount-input").keyup(function() {
+	var amount = $(this).val();
+	var reg = /^[0-9]+$/;
+	var regNum = /[^0-9]/g;
+	if (!reg.test(amount) || (amount <= 0)) {
+		$(this).val(function(n, c) {
+			if (amount.replace(regNum, "") != "") {
+				return amount.replace(regNum, "");
+			}
+
+			return 1;
+		})
+	}
+
+})
+	
 </script>
 </html>

@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-			String username = "";
-	        if (session.getAttribute("user") == null) {
-	    %>
-	    <script type="text/javascript">
-			alert("您还没有登录，请登录...");
-			window.location.href = "Login.html"
-		</script>
-		<%
-			}else{
-				username = (String) session.getAttribute("user");	
-			}
-		%>
+
+	<% 
+		String username = "";
+	    if (session.getAttribute("user") == null) {
+	    	username = "Hello";
+	    }else{
+	    	username = (String)session.getAttribute("user");
+	    }
+	%>
+	   
 	<div class="row" >
 	  <div class="col-lg-2">
 	  	 

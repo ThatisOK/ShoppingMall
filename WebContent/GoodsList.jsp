@@ -26,7 +26,8 @@ table input[type=text] {
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body background="static/img/background.jpg">
-	<jsp:include page="header.jsp"/>
+		
+	<jsp:include page="headerTwo.jsp"/>
 	<form action="ShopCar.jsp" methd="post">
 		<div >
 			<table id="PriceTable" class="table table-bordered">
@@ -53,5 +54,27 @@ table input[type=text] {
 			</table>
 		</div>
 	</form>
+	<script>
+		$('#logout').click(function() {
+			$.ajax({
+				  url: "UserServlet",
+				  data: {
+					  action:"signOut"
+			        },
+				  type:'post',
+				  dataType: 'json',
+				  success: function (data) {
+					  window.location.href = "Login.html";
+				  }
+				  
+				});
+		})
+		$('#viewcar').click(function() {
+			window.location.href = "ViewCart.jsp";
+		})
+		$("#mainPage").click(function(){
+			window.location.href = "GoodsList.jsp";
+		})
+	</script>
 </body>
 </html>

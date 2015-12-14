@@ -15,6 +15,7 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 .form-control {
 	width: 200px;
@@ -51,75 +52,71 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	$("#login").click(function(){
-		var username=$("#username").val();
-		var password=$.md5($("#password").val());
-		if(username == "" || password == "")
-			$("#login").text("用户名或密码不能为空");
-		else{
-			$.ajax({
-				  url: "UserServlet",
-				  data: {
-					  username:username,
-					  password:password,
-					  action:"signIn"
-			        },
-				  type:'post',
-				  dataType: 'json',
-				  success: function(data){
-					  if(data.errMsg=="success")
-					 	window.location.href="GoodsList.jsp";
-					  else if(data.errMsg=="failure")
-					  	$("#login").text("用户名或密码错误");
-					  }
-				  
-				});
-		}
-	})
-		  
+<script>
+$("#login").click(function() {
+	var username = $("#username").val();
+	var password = $.md5($("#password").val());
+	if (username == "" || password == "")
+		$("#login").text("用户名或密码不能为空");
+	else {
+		$.ajax({
+			url : "UserServlet",
+			data : {
+				username : username,
+				password : password,
+				action : "signIn"
+			},
+			type : 'post',
+			dataType : 'json',
+			success : function(data) {
+				if (data.errMsg == "success")
+					window.location.href = "GoodsList.jsp";
+				else if (data.errMsg == "failure")
+					$("#login").text("用户名或密码错误");
+			}
 
-	$("#username").blur(function(){
-		  
-		  var username = $(this).val();
-		  if(username.length<4){
-			  //$(this).css("background-color","#D6D6FF");
-			  $("#login").attr("disabled","disabled");
-			  $("#login").text("用户名低于4位");
-			  $("#password").attr("disabled","disabled");
-		  }else if(! /^\w+$/.test( username )){
-			  //$(this).css("background-color","#D6D6FF");
-			  $("#login").attr("disabled","disabled");
-			  $("#login").text("用户名只能包含_,字母，数字");
-			  $("#password").attr("disabled","disabled");
-		  }
 		});
-	$("#username").focus(function(){
-		//$("#username").css("background-color","white");
-		 $("#login").removeAttr("disabled");
-		 $("#login").text("Login in");
-		 $("#password").removeAttr("disabled");
-	});
-	$("#password").blur(function(){
-			var password = $(this).val();
-			if(password.length<4){
-				//$(this).css("background-color","#D6D6FF");
-				$("#login").text("密码不合法");
-				$("#login").attr("disabled","disabled");
-				$("#username").attr("disabled","disabled");
-		  }
-		  
-		  
-		});
-	$("#password").focus(function(){
-		//$("#password").css("background-color","white");
-		$("#login").text("Login in");
-		$("#login").removeAttr("disabled");
-		$("#username").removeAttr("disabled");
-	});
+	}
+})
 
-	
-	</script>
+$("#username").blur(function() {
+
+	var username = $(this).val();
+	if (username.length < 4) {
+		//$(this).css("background-color","#D6D6FF");
+		$("#login").attr("disabled", "disabled");
+		$("#login").text("用户名低于4位");
+		$("#password").attr("disabled", "disabled");
+	} else if (!/^\w+$/.test(username)) {
+		//$(this).css("background-color","#D6D6FF");
+		$("#login").attr("disabled", "disabled");
+		$("#login").text("用户名只能包含_,字母，数字");
+		$("#password").attr("disabled", "disabled");
+	}
+});
+$("#username").focus(function() {
+	//$("#username").css("background-color","white");
+	$("#login").removeAttr("disabled");
+	$("#login").text("Login in");
+	$("#password").removeAttr("disabled");
+});
+$("#password").blur(function() {
+	var password = $(this).val();
+	if (password.length < 4) {
+		//$(this).css("background-color","#D6D6FF");
+		$("#login").text("密码不合法");
+		$("#login").attr("disabled", "disabled");
+		$("#username").attr("disabled", "disabled");
+	}
+
+});
+$("#password").focus(function() {
+	//$("#password").css("background-color","white");
+	$("#login").text("Login in");
+	$("#login").removeAttr("disabled");
+	$("#username").removeAttr("disabled");
+});
+</script>
 
 </body>
 </html>
