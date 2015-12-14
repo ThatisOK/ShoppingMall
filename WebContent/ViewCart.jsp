@@ -222,19 +222,7 @@
 			}
 			
 		})
-		// 全选
-	/* 	$("#selectAllUp").click(function(){
-			if (this.checked) {  
-                $("input:checkbox").each(function() { //遍历所有的name为selectFlag的 checkbox  
-                	$(this).prop("checked", true);  
-                 })  
-            } else {   //反之 取消全选   
-                $("input:checkbox").each(function() { //遍历所有的name为selectFlag的 checkbox  
-                	$(this).prop("checked", false);  
-                            //alert("f");  
-                })  
-            }  
-        })  */
+		//全选
         $("input:checkbox[id$='SelectAll']").click(function(){
 			if (this.checked) {  
                 $("input:checkbox").each(function() { //遍历所有的name为selectFlag的 checkbox  
