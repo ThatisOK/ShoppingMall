@@ -250,6 +250,7 @@
         
         var countChecked = function() {
 			var n = $( "input:checked[name='selectFlag']" ).length;
+			/*  全选*/
 			if(n+2 < $( "input[type=checkbox]" ).length){
 				$("input:checkbox[id$='SelectAll']").prop("checked", false);
 			}else{
