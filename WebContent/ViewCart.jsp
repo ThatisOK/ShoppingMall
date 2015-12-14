@@ -249,7 +249,6 @@
         }) 
         
         var countChecked = function() {
-			//alert($(this).attr("checked"));
 			var n = $( "input:checked[name='selectFlag']" ).length;
 			if(n+2 < $( "input[type=checkbox]" ).length){
 				$("input:checkbox[id$='SelectAll']").prop("checked", false);
