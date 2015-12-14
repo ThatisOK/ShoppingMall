@@ -256,7 +256,7 @@
              })  
 				
 		}; 
-		
+		//checkbox点击事件
 		$( "input[type=checkbox]" ).on( "click", countChecked );
 		
 		$("#confirm").click(function(){
