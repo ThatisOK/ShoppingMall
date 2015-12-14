@@ -25,7 +25,7 @@
 	<jsp:include page="header.jsp"/>
 	<table class="table">
 		<tr>
-			<td><input type="checkbox" id="selectAllUp" >全选</td>
+			<td><input type="checkbox" id="upSelectAll" >全选</td>
 			<td>物品名称</td>
 			<td>数量</td>
 			<td>单价(元)</td>
@@ -43,7 +43,7 @@
 					good = gd.getGood(Integer.parseInt(s));
 		%>
 		<tr id="<%=good.getId()%>tr">
-			<td><input type="checkbox" name='selectFlag' id="select"></td>
+			<td><input type="checkbox" name='selectFlag' id="<%=good.getId()%>select"></td>
 			<td><%=good.getName()%></td>
 			<td>
 				<dl class="tb-amount tm-clear">
@@ -71,7 +71,7 @@
 			}
 		%>
 	<tr>
-			<td><input type="checkbox" id="selectAllDown" >全选</td>
+			<td><input type="checkbox" id="downSelectAll" >全选</td>
 			<td><button type="button" id="deleteAll" class="btn btn-link">删除</button></td>
 			<td id="selectedAmount">已选商品0件</td>
 			<td id="selectedMoney">合计:0.0</td>
@@ -223,7 +223,7 @@
 			
 		})
 		// 全选
-		$("#selectAllUp").click(function(){
+	/* 	$("#selectAllUp").click(function(){
 			if (this.checked) {  
                 $("input:checkbox").each(function() { //遍历所有的name为selectFlag的 checkbox  
                 	$(this).prop("checked", true);  
@@ -234,31 +234,37 @@
                             //alert("f");  
                 })  
             }  
-        }) 
-        $("#selectAllUp").click(function(){
+        })  */
+        $("input:checkbox[id$='SelectAll']").click(function(){
 			if (this.checked) {  
                 $("input:checkbox").each(function() { //遍历所有的name为selectFlag的 checkbox  
                 	$(this).prop("checked", true);  
                  })  
             } else {   //反之 取消全选   
                 $("input:checkbox").each(function() { //遍历所有的name为selectFlag的 checkbox  
-                	$(this).prop("checked", false);  
-                            //alert("f");  
+                	$(this).prop("checked", false); 
+                	$("#selectedMoney" ).text( "合计:0.0");
                 })  
             }  
         }) 
         
         var countChecked = function() {
-			alert($(this).attr("checked"));
+			//alert($(this).attr("checked"));
 			var n = $( "input:checked[name='selectFlag']" ).length;
+			if(n+2 < $( "input[type=checkbox]" ).length){
+				$("input:checkbox[id$='SelectAll']").prop("checked", false);
+			}else{
+				$("input:checkbox[id$='SelectAll']").prop("checked", true); 
+			}
 			var sum = 0;
 			$("#selectedAmount" ).text( "已选商品"+n+"件"  );
-			$("input:checked[name='selectFlag']").each(function() { //遍历所有的name为selectFlag的 checkbox  
-				alert($(this).attr("checked"));
-				if($(this).attr("checked") == true){
-            		sum += parseInt($("span[id$='money']").text());
+			$("input:checkbox[name='selectFlag']").each(function() { //遍历所有的name为selectFlag的 checkbox  
+				
+				if($(this).prop("checked") == true){
+					var id = $(this).attr('id').replace(/[^\d.]/g, "")+"money";
+            		sum += parseInt($("span[id$="+id+"]").text());
             		$("#selectedMoney" ).text( "合计:¥"+sum);
-            	}
+				}
              })  
 				
 		}; 
