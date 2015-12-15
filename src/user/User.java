@@ -1,4 +1,4 @@
-package shop;
+package user;
 
 public class User {
 	

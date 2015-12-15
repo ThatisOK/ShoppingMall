@@ -1,4 +1,4 @@
-package shop;
+package good;
 import java.sql.*;
 import java.util.*;
 
@@ -31,19 +31,12 @@ public class GoodsDAO {
 				good.setImg(rs.getString("img"));
 				list.add(good);
 			}
+			conn.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
-		
 		return list;
 		
 	}
@@ -64,19 +57,13 @@ public class GoodsDAO {
 				good.setPrice(rs.getDouble("price"));
 				good.setImg(rs.getString("img"));
 			}
+			conn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		return good;
 		

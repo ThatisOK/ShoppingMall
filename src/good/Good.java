@@ -1,4 +1,4 @@
-package shop;
+package good;
 
 public class Good {
 

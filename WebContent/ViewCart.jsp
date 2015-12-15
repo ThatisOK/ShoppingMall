@@ -72,7 +72,7 @@
 		%>
 	<tr>
 			<td><input type="checkbox" id="downSelectAll" >全选</td>
-			<td><button type="button" id="deleteAll" class="btn btn-link">删除</button></td>
+			<td><button type="button" id="deleteSelected" class="btn btn-link">删除</button></td>
 			<td id="selectedAmount">已选商品0件</td>
 			<td id="selectedMoney">合计:0.0</td>
 			<td><input type="button" class="btn btn-link" value="返回购物"
@@ -93,19 +93,19 @@
 	        <form>
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">收件人:</label>
-	            <input type="text" class="form-control" id="recipient-name">
+	            <input type="text" class="form-control" id="reciver">
 	          </div>
 	          <div class="form-group">
 	            <label for="message-text" class="control-label">电话:</label>
-	            <input type="text" class="form-control" id="recipient-name">
+	            <input type="text" class="form-control" id="phone">
 	          </div>
 	          <div class="form-group">
 	            <label for="message-text" class="control-label">地址:</label>
-	            <textarea class="form-control" id="message-text"></textarea>
+	            <textarea class="form-control" id="address"></textarea>
 	          </div>
 	          <div class="form-group">
 	            <label for="message-text" class="control-label">留言:</label>
-	            <textarea class="form-control" id="message-text"></textarea>
+	            <textarea class="form-control" id="message"></textarea>
 	          </div>
 	        </form>
 	      </div>
@@ -120,7 +120,7 @@
 	<script >
 
 	
-	function operation(id, operation, amount){
+	function cartOperation(id, operation, amount){
 		amount = typeof amount !== 'undefined' ?  amount : 1;
 		$.ajax({
 			  url: "ShoppingCartServlet",
@@ -151,7 +151,7 @@
 						return parseInt(obj.val())
 								* parseInt($('#' + id + "price").text());
 					})
-					operation(id, "update", parseInt(obj.val()));
+					cartOperation(id, "update", parseInt(obj.val()));
 
 				})
 		/*  
@@ -173,7 +173,7 @@
 								* parseInt($('#' + id + "price").text());
 					})
 					
-					operation(id, "update", parseInt(obj.val()));
+					cartOperation(id, "update", parseInt(obj.val()));
 				})
 		/*
 		 *禁止输入非数字，比如字母，小数点
@@ -204,7 +204,7 @@
 						return parseInt(amount.replace(regNum, ""))
 								* $('#' + id + "price").text();
 					})
-					operation(id, "update", parseInt(amount));
+					cartOperation(id, "update", parseInt(amount));
 
 				})
 		/*
@@ -218,7 +218,7 @@
 			if(confirm("确认删除？")){
 				var id = $(this).attr('id').replace(/[^\d.]/g, "");
 				$(this).parent("td").parent("tr").remove(); 
-				operation(id,"delete");
+				cartOperation(id,"delete");
 			}
 			
 		})
@@ -260,8 +260,43 @@
 		$( "input[type=checkbox]" ).on( "click", countChecked );
 		
 		$("#confirm").click(function(){
-			alert("Confim");
+			var reciver = $("#reciver").val();
+			var phone = $("#phone").val();
+			var address = $("address").val();
+			var message = $("message").val();
+			$.ajax({
+				  url: "ShoppingCartServlet",
+				  data: {
+			          reciver:reciver,
+			          phone:phone,
+			          address:address,
+			          message:message,
+			          operation:operation
+			        },
+				  type:'post',
+				  dataType: 'json',
+				  success: function (data) {}
+				  
+				});
+			
 		})
+		//删除所选的物品
+		$("#deleteSelected").click(function(){
+			var n = $( "input:checked[name='selectFlag']" ).length;
+			if(n > 0){
+				if(confirm("确认删除？")){
+					$("input:checkbox[name='selectFlag']").each(function() { //遍历所有的name为selectFlag的 checkbox  	
+						if($(this).prop("checked") == true){
+							var id = $(this).attr('id').replace(/[^\d.]/g, "");
+							$(this).parent("td").parent("tr").remove(); 
+							cartOperation(id,"delete");
+						}
+		             })  
+				}
+			}else{
+				alert("没有商品！");
+			}		
+		})		
 		
 		
 	</script>

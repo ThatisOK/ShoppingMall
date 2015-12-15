@@ -1,4 +1,4 @@
-package shop;
+package user;
 
 import java.sql.*;
 
@@ -22,19 +22,13 @@ public class UserDao {
 			ResultSet rs = stmt.executeQuery(sql);
 			if(rs.next())
 				result = rs.getString("password");
+			conn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		return result;
 	}
