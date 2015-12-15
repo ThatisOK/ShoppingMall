@@ -118,7 +118,6 @@
 	</div>
 	<!--此为确认订单信息弹出框  end-->
 	<script >
-
 	
 	function cartOperation(id, operation, amount){
 		amount = typeof amount !== 'undefined' ?  amount : 1;
@@ -260,23 +259,38 @@
 		$( "input[type=checkbox]" ).on( "click", countChecked );
 		
 		$("#confirm").click(function(){
+			var data = "";
+			$("input:checkbox[name='selectFlag']").each(function() { //遍历所有的name为selectFlag的 checkbox  	
+				if($(this).prop("checked") == true){
+					var id = $(this).attr('id').replace(/[^\d.]/g, "");
+					var num = $("input:text[id="+id+"input]").val();
+					data += id + "+" + num + ";";
+					
+				}
+             }) 
 			var reciver = $("#reciver").val();
 			var phone = $("#phone").val();
-			var address = $("address").val();
-			var message = $("message").val();
+			var address = $("#address").val();
+			var message = $("#message").val();
+			var username = $("#username").text();
 			$.ajax({
-				  url: "ShoppingCartServlet",
+				  url: "OrderServlet",
 				  data: {
 			          reciver:reciver,
 			          phone:phone,
 			          address:address,
 			          message:message,
-			          operation:operation
+			          data:data,
+			          username:username,
+			          operation:"add"
 			        },
 				  type:'post',
 				  dataType: 'json',
-				  success: function (data) {}
-				  
+				  success: function (data) {
+					  if(data.errno == "0")
+					  		window.location.href = "Clearing.jsp";
+				  }
+				  	
 				});
 			
 		})

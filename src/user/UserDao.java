@@ -32,5 +32,27 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public String getIdByUsername(String username){
+		String id = "";
+		Connection conn = null;
+		try {
+			conn = this.getConn();
+			Statement stmt = conn.createStatement();
+			String sql = "select * from user where username='"+username+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next())
+				id = rs.getString("id");
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
+		
+	}
 
 }

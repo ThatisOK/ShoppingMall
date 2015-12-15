@@ -19,7 +19,7 @@
 	  </div>
 	  <div class="col-lg-2">
 	  	  <span class="input-group-btn">
-	        <button class="btn btn-link" type="button"><%=username%></button>
+	        <button class="btn btn-link" type="button" id="username"><%=username%></button>
 	      </span>
 	  </div>
 	   <div class="col-lg-2">
