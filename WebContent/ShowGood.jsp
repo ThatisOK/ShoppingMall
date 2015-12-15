@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="shop.GoodsDAO"%>
-<%@ page import="shop.Good"%>
+<%@ page import="good.GoodsDAO"%>
+<%@ page import="good.Good"%>
 <%
 	String id = request.getParameter("id");
 	GoodsDAO gd = new GoodsDAO();
