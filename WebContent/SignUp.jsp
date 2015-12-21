@@ -1,0 +1,107 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="static/js/jQuery.md5.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+.form-control {
+	width: 200px;
+}
+.user-item-error  {
+    display: none;
+    float: left;
+    position: absolute;
+    width: 250px;
+    top: 185px;
+    left: 760px;
+    margin-left:10px;
+    color: #fc4343;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+}
+.pass-item-error{
+    display: none;
+    float: left;
+    position: absolute;
+    width: 250px;
+    top: 235px;
+    left: 760px;
+    margin-left:10px;
+    color: #fc4343;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+}
+</style>
+<title>SignUp</title>
+</head>
+<body background="static/img/bg.jpg">
+	<div class="row">
+		<div class=" col-md-11"></div>
+		<div class=" col-md-1">
+			<button type="submit" class="btn btn-link" id="signUp">注册</button>
+		</div>
+	</div>
+	<div class="form-horizontal" style="width: 600px; margin: 10% 10% 0 40%;">
+		<div class="form-group">
+			<!-- <label for="inputEmail3" class="col-sm-2 control-label">Username</label> -->
+			<div class="col-sm-10" id="usernameDiv">
+				<input type="text" class="form-control" name="username"
+					placeholder="Phone/Email" id="username" style="background:transparent" data-toggle="popover" data-trigger="focus" data-html=true data-content="请输入手机号或者邮箱"></input>
+				
+			</div>
+			
+		</div>
+		<div class="form-group">
+			<!-- <label for="inputPassword3" class="col-sm-2 control-label">Password</label> -->
+			<div class="col-sm-10" id="passwordDiv">
+				<input type="password" class="form-control" name="password"
+					placeholder="Password" id="password" style="background:transparent" data-toggle="popover" data-trigger="focus"  data-html=true data-content="<ul><li>长度为4~16个字符</li><li>支持数字，大小写字母，和标点符合</li><li>不支持空格</li>"></input>
+				
+			</div>
+			
+		</div>
+		<div class="form-group">
+			<div class=" col-sm-10">
+				<button type="submit" class="btn btn-primary btn-block" style="width: 200px" id="signUp" > 注册</button>
+			</div>
+		</div>
+		<span class='user-item-error'>请您输入手机/邮箱</span>
+		<span class='pass-item-error'>请输入密码</span>
+	</div>
+	<script>
+		$("button").click(function(){
+			var username = $("#username").val();
+			var password = $("#password").val();
+			$(".user-item-error").css("display", "block");
+			$(".pass-item-error").css("display", "block");
+				
+			
+		})
+		$("input").click(function(){
+			$(this).popover("show");
+			
+		})
+		
+		$("#username").click(function(){
+			$(".user-item-error").css("display", "none");
+		})
+		
+		$("#password").click(function(){
+			$(".pass-item-error").css("display", "none");
+		})
+		
+		
+			
+	</script>
+</body>
+</html>
