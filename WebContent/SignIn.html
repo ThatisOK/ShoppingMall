@@ -24,6 +24,12 @@
 
 </head>
 <body background="static/img/bg.jpg">
+	<div class="row">
+		<div class=" col-md-11"></div>
+		<div class=" col-md-1">
+			<button type="submit" class="btn btn-link" id="signUp">注册</button>
+		</div>
+	</div>
 	<div class="form-horizontal"
 		style="width: 600px; margin: 10% 10% 0 40%;">
 		<div class="form-group">
@@ -42,18 +48,14 @@
 		</div>
 		<div class="form-group">
 			<div class=" col-sm-10">
-				<button type="submit" class="btn btn-primary btn-block" id="login"
-					style="width: 200px">Login in</button>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<span aria-hidden="true" id="msg"></span>
+				<button type="submit" class="btn btn-primary btn-block" id="signIn"
+					style="width: 200px">登陆</button>
 			</div>
 		</div>
 	</div>
 <script>
-$("#login").click(function() {
+
+$("#signIn").click(function() {
 	var username = $("#username").val();
 	var password = $.md5($("#password").val());
 	if (username == "" || password == "")
@@ -77,6 +79,10 @@ $("#login").click(function() {
 
 		});
 	}
+})
+
+$("#signUp").click(function(){
+	window.location.href = "SignUp.jsp";
 })
 
 $("#username").blur(function() {
