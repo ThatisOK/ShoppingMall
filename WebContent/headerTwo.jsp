@@ -53,7 +53,7 @@ $('#logout').click(function() {
 		type : 'post',
 		dataType : 'json',
 		success : function(data) {
-			window.location.href = "Login.html";
+			window.location.href = "SignIn.html";
 		}
 
 	});

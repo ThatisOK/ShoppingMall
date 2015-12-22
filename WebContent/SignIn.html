@@ -20,6 +20,33 @@
 .form-control {
 	width: 200px;
 }
+
+.user-item-error  {
+    display: none;
+    float: left;
+    position: absolute;
+    width: 250px;
+    top: 185px;
+    left: 760px;
+    margin-left:10px;
+    color: #fc4343;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+}
+.pass-item-error{
+    display: none;
+    float: left;
+    position: absolute;
+    width: 250px;
+    top: 235px;
+    left: 760px;
+    margin-left:10px;
+    color: #fc4343;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+}
 </style>
 
 </head>
@@ -36,14 +63,14 @@
 			<!-- <label for="inputEmail3" class="col-sm-2 control-label">Username</label> -->
 			<div class="col-sm-10">
 				<input type="text" class="form-control" name="username"
-					placeholder="Username" id="username" style="background:transparent">
+					placeholder="Username" id="username" style="background:transparent" data-toggle="popover" data-trigger="focus" data-html=true data-content="请输入手机号或者邮箱">
 			</div>
 		</div>
 		<div class="form-group">
 			<!-- <label for="inputPassword3" class="col-sm-2 control-label">Password</label> -->
 			<div class="col-sm-10">
 				<input type="password" class="form-control" name="password"
-					placeholder="Password" id="password" style="background:transparent">
+					placeholder="Password" id="password" style="background:transparent" data-toggle="popover" data-trigger="focus"  data-html=true data-content="<ul><li>长度为4~16个字符</li><li>支持数字，大小写字母，和标点符合</li><li>不支持空格</li>">
 			</div>
 		</div>
 		<div class="form-group">
@@ -53,14 +80,20 @@
 			</div>
 		</div>
 	</div>
+	<span class='user-item-error'>请您输入手机/邮箱</span>
+	<span class='pass-item-error'>请输入密码</span>
 <script>
 
 $("#signIn").click(function() {
 	var username = $("#username").val();
 	var password = $.md5($("#password").val());
-	if (username == "" || password == "")
-		$("#login").text("用户名或密码不能为空");
-	else {
+	if (username == ""){
+		$(".user-item-error").css("display", "block");		
+	}
+	if(password == ""){
+		$(".pass-item-error").css("display", "block");
+	}
+	if(username != "" && password != ""){
 		$.ajax({
 			url : "UserServlet",
 			data : {
@@ -85,43 +118,20 @@ $("#signUp").click(function(){
 	window.location.href = "SignUp.jsp";
 })
 
-$("#username").blur(function() {
+$("input").click(function(){
+	$(this).popover("show");
+			
+})
 
-	var username = $(this).val();
-	if (username.length < 4) {
-		//$(this).css("background-color","#D6D6FF");
-		$("#login").attr("disabled", "disabled");
-		$("#login").text("用户名低于4位");
-		$("#password").attr("disabled", "disabled");
-	} else if (!/^\w+$/.test(username)) {
-		//$(this).css("background-color","#D6D6FF");
-		$("#login").attr("disabled", "disabled");
-		$("#login").text("用户名只能包含_,字母，数字");
-		$("#password").attr("disabled", "disabled");
-	}
-});
-$("#username").focus(function() {
-	//$("#username").css("background-color","white");
-	$("#login").removeAttr("disabled");
-	$("#login").text("Login in");
-	$("#password").removeAttr("disabled");
-});
-$("#password").blur(function() {
-	var password = $(this).val();
-	if (password.length < 4) {
-		//$(this).css("background-color","#D6D6FF");
-		$("#login").text("密码不合法");
-		$("#login").attr("disabled", "disabled");
-		$("#username").attr("disabled", "disabled");
-	}
+$("#username").click(function(){
+	$(".user-item-error").css("display", "none");
+})
 
-});
-$("#password").focus(function() {
-	//$("#password").css("background-color","white");
-	$("#login").text("Login in");
-	$("#login").removeAttr("disabled");
-	$("#username").removeAttr("disabled");
-});
+$("#password").click(function(){
+	$(".pass-item-error").css("display", "none");
+})
+
+
 </script>
 
 </body>
