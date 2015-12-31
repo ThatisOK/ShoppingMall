@@ -34,9 +34,9 @@
 	  </div>
 	  <div class="col-lg-3">
 	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Search for..." style="background:transparent">
+	      <input type="text" class="form-control" placeholder="Search for..." style="background:transparent id="searchText">
 	      <span class="input-group-btn">
-	        <button class="btn btn-primary" type="button">搜索</button>
+	        <button class="btn btn-primary" type="button" id="search">搜索</button>
 	      </span>
 	    </div><!-- /input-group -->
 	  </div><!-- /.col-lg-6 -->
@@ -66,6 +66,23 @@ $('#viewcar').click(function() {
 })
 $("#mainPage").click(function() {
 	window.location.href = "GoodsList.jsp";
+})
+
+$("#search").click(function(){
+	var name = $("searchText").val();
+	$.ajax({
+		url : "ShoppingCartServlet",
+		data : {
+			action : "search",
+			name : name
+		},
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			window.location.href = "SignIn.html";
+		}
+
+	});
 })
 </script>
 	

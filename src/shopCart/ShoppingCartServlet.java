@@ -1,4 +1,4 @@
-package shop;
+package shopCart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,6 +66,9 @@ public class ShoppingCartServlet extends HttpServlet {
 		case "update":
 			errno = cart.updateGood(id, amount, session);
 			msg.sendJson(response, errno, "success");
+			break;
+		case "search":
+			//errno = cart.
 			break;
 		}
 	}

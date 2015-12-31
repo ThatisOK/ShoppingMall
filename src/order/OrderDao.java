@@ -9,6 +9,12 @@ import user.UserDao;
 
 public class OrderDao {
 	
+	/**
+	 * 连接数据库并获得Connection
+	 * @return conn
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public Connection getConn() throws ClassNotFoundException, SQLException {
 
 		Class.forName("com.mysql.jdbc.Driver");  
@@ -17,6 +23,13 @@ public class OrderDao {
 		return conn;
 	}
 	
+	/**
+	 * 添加订单
+	 * @param order
+	 * @param goodToNum
+	 * @param username
+	 * @return  错误代码 
+	 */
 	public int addOrder(Order order, String[] goodToNum, String username){
 		Connection conn = null;
 		UserDao user = new UserDao();

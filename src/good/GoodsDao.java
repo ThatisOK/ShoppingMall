@@ -3,9 +3,15 @@ import java.sql.*;
 import java.util.*;
 
 
-public class GoodsDAO {
+public class GoodsDao {
 	
 
+	/**
+	 *获得的Connection
+	 * @return conn
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public Connection getConn() throws ClassNotFoundException, SQLException {
 
 		Class.forName("com.mysql.jdbc.Driver");  
@@ -14,6 +20,10 @@ public class GoodsDAO {
 		return conn;
 	}
 	
+	/**
+	 * 获得所有商品的集合
+	 * @return 获得的商品集合
+	 */
 	public ArrayList<Good> getGoods(){
 		ArrayList<Good> list = new ArrayList<Good>();
 		Connection conn = null;
@@ -41,6 +51,11 @@ public class GoodsDAO {
 		
 	}
 	
+	/**
+	 * 根据id获得商品
+	 * @param: id
+	 * @return: 找到的商品或者空
+	 */
 	public Good getGood(int id){
 		Connection conn = null;
 		Good good = null;
@@ -67,6 +82,38 @@ public class GoodsDAO {
 		}
 		return good;
 		
+	}
+	
+	/**
+	 * 根据商品名获得商品
+	 * @param name
+	 * @return good
+	 */
+	public Good getGood(String name){
+		Connection conn = null;
+		Good good = null;
+		try {
+			conn = this.getConn();
+			Statement stmt = conn.createStatement();
+			String sql = "select * from goods where name = '"+name+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				good = new Good();
+				good.setId(rs.getInt("id"));
+				good.setName(rs.getString("name"));
+				good.setNumber(rs.getInt("number"));
+				good.setPrice(rs.getDouble("price"));
+				good.setImg(rs.getString("img"));
+			}
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return good;
 	}
 
 }

@@ -1,6 +1,8 @@
 package user;
 
 import java.sql.*;
+import java.util.Random;
+import tool.RandomId;
 
 public class UserDao {
 	
@@ -52,6 +54,27 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		return id;
+		
+	}
+	
+	public void userAdd(String username, String password){
+		Connection conn = null;
+		RandomId r = new RandomId();
+		Random random = new Random();
+		String id = r.randomId(random.nextInt(10));
+		try {
+			conn = this.getConn();
+			Statement stmt = conn.createStatement();
+			String sql = "insert into user values('"+id+"','"+username+"','"+password+"')";
+			stmt.execute(sql);
+			conn.close();
+		}catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

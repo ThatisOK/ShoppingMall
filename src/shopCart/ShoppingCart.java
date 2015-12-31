@@ -1,7 +1,8 @@
-package shop;
+package shopCart;
 
-import java.util.*;
 import javax.servlet.http.HttpSession;
+import good.Good;
+import good.GoodsDao;
 
 public class ShoppingCart {
 	
@@ -13,7 +14,7 @@ public class ShoppingCart {
 		
 	}
 	
-	/*
+	/**
 	 * 功能：往购物车中添加商品
 	 * 参数：物品ID, 数量, session
 	 * 步骤：先获得物品ID，然后和session中已存的进行比较
@@ -29,7 +30,7 @@ public class ShoppingCart {
 		
 	}
 	
-	/*
+	/**
 	 * 功能：更新购物车商品数量
 	 * 参数：物品ID, 数量, session
 	 * 步骤：先获得物品ID，和session则中已存的进行比较，如果存在，则直接修改，返回0；否则返回－1。
@@ -46,7 +47,7 @@ public class ShoppingCart {
 		
 	}
 	
-	/*
+	/**
 	 * 功能：从购物车中删除
 	 * 参数：物品ID, 数量, session
 	 * 步骤：先获得物品ID，然后和session中已存的进行比较
@@ -70,7 +71,7 @@ public class ShoppingCart {
 		
 	}
 	
-	/*
+	/**
 	 * 功能：从session中完全删除某个商品
 	 * 参数：商品ID, session
 	 * 步骤：先判断是否有该商品, 如果有，直接删除，返回0，没有则无操作，返回－1
@@ -84,6 +85,28 @@ public class ShoppingCart {
 			return 0;
 		}
 		return -1;	
+	}
+	
+	/**
+	 * 功能 先根据名称找到该物品对应的id，然后根据id在session中进行搜索
+	 * 步骤 直接在session中进行搜索
+	 * @param 商品名称
+	 * @return 商品id 
+	 * 			－1	没有该商品
+	 * 			其他 商品id
+	 */
+	
+	public int searchGood(String name, HttpSession session){
+		int goodId = -1;
+		GoodsDao gd = new GoodsDao();
+		Good good = gd.getGood(name);
+		if(good != null){
+			goodId = good.getId();
+			if(session.getAttribute(String.valueOf(goodId)) != null){
+				return goodId;
+			}
+		}
+		return goodId;
 	}
 
 }

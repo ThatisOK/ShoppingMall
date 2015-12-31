@@ -1,4 +1,4 @@
-package md5;
+package tool;
 
 import java.security.*;
 
@@ -6,6 +6,8 @@ public class Md5 {
 	
 	/*
 	 * 将input转换为32位md5
+	 * @param input
+	 * @return 转换后的密文
 	*/
 	
 	public String Encryption(String input){

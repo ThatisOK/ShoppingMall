@@ -8,6 +8,14 @@ public class Good {
 	private int number = 0;// 商品的数量number
 	private String img = "null.png"; //商品的图片img
 
+	/**
+	 * 构造方法
+	 * @param Id
+	 * @param name
+	 * @param price
+	 * @param number
+	 * @param img
+	 */
 	public Good(int Id, String name, float price, int number, String img) {
 		this.Id = Id;
 		this.name = name;
@@ -17,26 +25,29 @@ public class Good {
 
 	}
 	
+	/**
+	 * 空构造方法
+	 */
 	public Good(){
 
 	}
 
-	public int getId() // 返回订购商品的编号Id
+	public int getId() 
 	{
 		return this.Id;
 	}
 
-	public String getName() // 返回订购商品的名称name
+	public String getName() 
 	{
 		return this.name;
 	}
 
-	public double getPrice() // 返回订购商品的价格price
+	public double getPrice() 
 	{
 		return this.price;
 	}
 
-	public int getNumber() // 返回订购商品的数量number
+	public int getNumber() 
 	{
 		return this.number;
 	}

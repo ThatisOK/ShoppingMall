@@ -86,19 +86,20 @@
 
 $("#signIn").click(function() {
 	var username = $("#username").val();
-	var password = $.md5($("#password").val());
+	var password = $("#password").val();
 	if (username == ""){
-		$(".user-item-error").css("display", "block");		
+		$(".user-item-error").css("display", "block");	
 	}
 	if(password == ""){
 		$(".pass-item-error").css("display", "block");
 	}
-	if(username != "" && password != ""){
+	else{
+		passwordMd5 = $.md5(password);
 		$.ajax({
 			url : "UserServlet",
 			data : {
 				username : username,
-				password : password,
+				password : passwordMd5,
 				action : "signIn"
 			},
 			type : 'post',
@@ -107,7 +108,7 @@ $("#signIn").click(function() {
 				if (data.errMsg == "success")
 					window.location.href = "GoodsList.jsp";
 				else if (data.errMsg == "failure")
-					$("#login").text("用户名或密码错误");
+					$("#signIn").text("用户名或密码错误");
 			}
 
 		});
@@ -115,7 +116,7 @@ $("#signIn").click(function() {
 })
 
 $("#signUp").click(function(){
-	window.location.href = "SignUp.jsp";
+	window.location.href = "SignUp.html";
 })
 
 $("input").click(function(){

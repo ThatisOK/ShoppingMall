@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="good.GoodsDAO"%>
+<%@ page import="good.GoodsDao"%>
 <%@ page import="good.Good"%>
 <%
 	String id = request.getParameter("id");
-	GoodsDAO gd = new GoodsDAO();
+	GoodsDao gd = new GoodsDao();
 	Good good = gd.getGood(Integer.parseInt(id));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

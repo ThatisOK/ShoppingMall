@@ -17,7 +17,7 @@ public class Order {
 	public Order(){
 		this.id = UUID.randomUUID().toString().replaceAll("-", "");
 	}
-	 Order(String userId, String reciver, String phone, String address, String message) {
+	public Order(String userId, String reciver, String phone, String address, String message) {
 		this.id = UUID.randomUUID().toString().replaceAll("-", "");
 		this.userId = userId;
 		this.reciver = reciver;

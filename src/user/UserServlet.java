@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import md5.Md5;
+import tool.Md5;
 import tool.Message;
 
 
@@ -47,7 +47,7 @@ public class UserServlet extends HttpServlet {
 	 * 数据库中的用户名 	明文
 	 * 数据库中的密码  	明文
 	 * 成功 return success
-	 * 十本 return failure
+	 * 失败 return failure
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -56,9 +56,12 @@ public class UserServlet extends HttpServlet {
 		HttpSession  session = request.getSession();
 		Message msg = new Message();
 		switch(action){
-		case "signIn":
+		case "signIn":{
 			String Username = request.getParameter("username");
 			String Password = request.getParameter("password");
+			System.out.println(action);
+			System.out.println(Username);
+			System.out.println(Password);
 			Md5 md5 = new Md5();
 			UserDao ud = new UserDao();
 			String passwordMd5 = md5.Encryption(ud.userLogin(Username.trim()));
@@ -71,12 +74,23 @@ public class UserServlet extends HttpServlet {
 				msg.sendJson(response, -1, "failure");
 			}
 			break;
-		case "signOut":
-			//session.invalidate();
+			}
+		case "signOut":{
 			session.removeAttribute("user");
 			msg.sendJson(response, 0, "SignOutSuccess");
 			break;
+			}
+		case "signUp":{
+			String Username = request.getParameter("username");
+			String Password = request.getParameter("password");
+			UserDao ud = new UserDao();
+			ud.userAdd(Username, Password);
+			session.setAttribute("user", Username);
+			msg.sendJson(response, 0, "SignUpSuccess");
+			}
 		}
+		
+			
 	}
 	
 

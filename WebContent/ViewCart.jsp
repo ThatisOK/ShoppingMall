@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
-<%@ page import="good.GoodsDAO"%>
+<%@ page import="good.GoodsDao"%>
 <%@ page import="good.Good"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,7 +33,7 @@
 			<td>操作</td>
 		</tr>
 		<%
-			GoodsDAO gd = new GoodsDAO();
+			GoodsDao gd = new GoodsDao();
 			Good good;
 			int num = 0;
 			for (Enumeration<String> goods = session.getAttributeNames(); goods.hasMoreElements();) {
@@ -267,31 +267,36 @@
 					data += id + "+" + num + ";";
 					
 				}
-             }) 
-			var reciver = $("#reciver").val();
-			var phone = $("#phone").val();
-			var address = $("#address").val();
-			var message = $("#message").val();
-			var username = $("#username").text();
-			$.ajax({
-				  url: "OrderServlet",
-				  data: {
-			          reciver:reciver,
-			          phone:phone,
-			          address:address,
-			          message:message,
-			          data:data,
-			          username:username,
-			          operation:"add"
-			        },
-				  type:'post',
-				  dataType: 'json',
-				  success: function (data) {
-					  if(data.errno == "0")
-					  		window.location.href = "Clearing.jsp";
-				  }
-				  	
-				});
+             })
+            if(data == ""){
+            	alert("没有商品")
+            }
+            else{
+            	var reciver = $("#reciver").val();
+    			var phone = $("#phone").val();
+    			var address = $("#address").val();
+    			var message = $("#message").val();
+    			var username = $("#username").text();
+    			$.ajax({
+    				  url: "OrderServlet",
+    				  data: {
+    			          reciver:reciver,
+    			          phone:phone,
+    			          address:address,
+    			          message:message,
+    			          data:data,
+    			          username:username,
+    			          operation:"add"
+    			        },
+    				  type:'post',
+    				  dataType: 'json',
+    				  success: function (data) {
+    					  if(data.errno == "0")
+    					  		window.location.href = "Clearing.jsp";
+    				  }
+    				  	
+    				});
+            }
 			
 		})
 		//删除所选的物品

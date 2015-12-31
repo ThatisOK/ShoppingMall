@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
-<%@ page import="good.GoodsDAO"%>
+<%@ page import="good.GoodsDao"%>
 <%@ page import="good.Good"%>
 
 
@@ -36,7 +36,7 @@ table input[type=text] {
 					<td>价格</td>
 				</tr>
 				<%
-					GoodsDAO gd = new GoodsDAO();
+					GoodsDao gd = new GoodsDao();
 					ArrayList<Good> goods = new ArrayList<Good>();
 					goods = gd.getGoods();
 					for (int i = 0; i < goods.size(); i++) {
@@ -54,7 +54,7 @@ table input[type=text] {
 			</table>
 		</div>
 	</form>
-	<script>
+	<!-- <script>
 		$('#logout').click(function() {
 			$.ajax({
 				  url: "UserServlet",
@@ -75,6 +75,6 @@ table input[type=text] {
 		$("#mainPage").click(function(){
 			window.location.href = "GoodsList.jsp";
 		})
-	</script>
+	</script> -->
 </body>
 </html>
