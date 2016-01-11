@@ -1,3 +1,5 @@
+<script src="static/js/index.js"></script>
+<link href="static/css/style.css" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
@@ -6,7 +8,7 @@
 	    %>
 	    <script type="text/javascript">
 			alert("您还没有登录，请登录...");
-			window.location.href = "Login.html"
+			window.location.href = "SignIn.html"
 		</script>
 		<%
 			}else{
@@ -14,6 +16,8 @@
 			}
 		%>
 	<div class="row" >
+	  	   
+	    
 	  <div class="col-lg-2">
 	  	 
 	  </div>
@@ -22,6 +26,7 @@
 	        <button class="btn btn-link" type="button" id="username"><%=username%></button>
 	      </span>
 	  </div>
+	 
 	   <div class="col-lg-2">
 	  	  <span class="input-group-btn">
 	        <button class="btn btn-link" type="button" id="mainPage">首页</button>
@@ -84,5 +89,6 @@ $("#search").click(function(){
 
 	});
 })
+
 </script>
 	

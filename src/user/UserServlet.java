@@ -59,9 +59,6 @@ public class UserServlet extends HttpServlet {
 		case "signIn":{
 			String Username = request.getParameter("username");
 			String Password = request.getParameter("password");
-			System.out.println(action);
-			System.out.println(Username);
-			System.out.println(Password);
 			Md5 md5 = new Md5();
 			UserDao ud = new UserDao();
 			String passwordMd5 = md5.Encryption(ud.userLogin(Username.trim()));

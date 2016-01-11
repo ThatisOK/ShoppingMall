@@ -49,7 +49,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		int amount = 0;
 		if(request.getParameter("amount") != null){
 			amount = Integer.parseInt(request.getParameter("amount"));
-		}	
+		}
 		ShoppingCart cart = new ShoppingCart();
 		HttpSession session = request.getSession();
 		Message msg = new Message();
@@ -69,6 +69,17 @@ public class ShoppingCartServlet extends HttpServlet {
 			break;
 		case "search":
 			//errno = cart.
+			break;
+		case "remove":
+			String data = request.getParameter("data");
+			String[] goodToNum = data.split(";");
+			for(int i=0; i<goodToNum.length; i++){
+				String goodId = goodToNum[i].split("\\+")[0];
+				//int goodAmount = Integer.parseInt(goodToNum[i].split("\\+")[1]);
+				//cart.removeGood(goodId, goodAmount, session);
+				cart.removeGood(goodId, session);
+			}
+			msg.sendJson(response, errno, "success");
 			break;
 		}
 	}

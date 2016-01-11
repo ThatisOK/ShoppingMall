@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
-<%@ page import="good.GoodsDao"%>
-<%@ page import="good.Good"%>
+<jsp:useBean id="gd" scope="page" class="good.GoodsDao"></jsp:useBean>
+<jsp:useBean id="good" scope="page" class="good.Good"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,8 +33,6 @@
 			<td>操作</td>
 		</tr>
 		<%
-			GoodsDao gd = new GoodsDao();
-			Good good;
 			int num = 0;
 			for (Enumeration<String> goods = session.getAttributeNames(); goods.hasMoreElements();) {
 				String s = goods.nextElement();	
@@ -290,12 +288,28 @@
     			        },
     				  type:'post',
     				  dataType: 'json',
-    				  success: function (data) {
-    					  if(data.errno == "0")
-    					  		window.location.href = "Clearing.jsp";
+    				  success: function (revData) {
+    					  if(revData.errno == "0"){
+    						  $.ajax({
+    			    				url:"ShoppingCartServlet",
+    			    				data:{
+    			    					operation:"remove",
+    			    					data:data
+    			    				},
+    			    				type:"post",
+    			    				dataType:"json",
+    			    				success: function (data) {
+    			  					  if(data.errno == "1")
+    			  						window.location.href = "Clearing.jsp";
+    			    				}
+    			    				
+    			    			})
+    					  }
+    					  		 
     				  }
     				  	
     				});
+    			
             }
 			
 		})

@@ -6,6 +6,8 @@ import java.util.*;
 public class GoodsDao {
 	
 
+	public GoodsDao(){}
+	
 	/**
 	 *获得的Connection
 	 * @return conn

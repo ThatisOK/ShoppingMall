@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
-<%@ page import="good.GoodsDao"%>
-<%@ page import="good.Good"%>
-
-
-
+<jsp:useBean id="gd" scope="page" class="good.GoodsDao"></jsp:useBean>
+<jsp:useBean id="good" scope="page" class="good.Good"></jsp:useBean>
+<%@ page import="good.Good"%> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,14 +34,14 @@ table input[type=text] {
 					<td>价格</td>
 				</tr>
 				<%
-					GoodsDao gd = new GoodsDao();
+					//GoodsDao gd = new GoodsDao();
 					ArrayList<Good> goods = new ArrayList<Good>();
 					goods = gd.getGoods();
 					for (int i = 0; i < goods.size(); i++) {
 				%>
 				<tr>
 
-					<td><a href='ShowGood.jsp?id=<%=goods.get(i).getId()%>' /><%=goods.get(i).getName()%></td>
+					<td><a href='ShowGood.jsp?id=<%=goods.get(i).getId()%>'><%=goods.get(i).getName()%></a></td>
 					<td><%=goods.get(i).getPrice()%></td>
 
 				</tr>
