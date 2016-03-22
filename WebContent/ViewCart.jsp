@@ -68,7 +68,7 @@
 
 			}
 		%>
-	<tr>
+		<tr>
 			<td><input type="checkbox" id="downSelectAll" >全选</td>
 			<td><button type="button" id="deleteSelected" class="btn btn-link">删除</button></td>
 			<td id="selectedAmount">已选商品0件</td>
