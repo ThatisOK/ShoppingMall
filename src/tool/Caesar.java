@@ -51,12 +51,15 @@ public class Caesar {
 
         for(int i = 0; i < e; i += 1) {
             m = dict(text.charAt(i), reverse);
-            if (m < 0) break;
+            if (m < 0) {
+				break;
+			}
             m = m + key + i;
             buf.append(dict(m % s, reverse));
         }
-        if (buf.length() == e)
-            ret = buf.toString();
+        if (buf.length() == e) {
+			ret = buf.toString();
+		}
         return ret;
     }
     public String encode(int key, String text) {

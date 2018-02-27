@@ -11,7 +11,7 @@ public class Order {
 	private String address;		//收件人地址
 	private String message;		//留言
 	
-	/*
+	/**
 	 * 自动生成唯一订单号
 	 */
 	public Order(){

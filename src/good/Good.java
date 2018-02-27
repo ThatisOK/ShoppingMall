@@ -2,7 +2,7 @@ package good;
 
 public class Good {
 
-	private int Id = 0;// 商品的编号Id
+	private int id = 0;// 商品的编号Id
 	private String name = null;// 商品的名称name
 	private double price = 0.00d;// 商品的价格price
 	private int number = 0;// 商品的数量number
@@ -16,8 +16,8 @@ public class Good {
 	 * @param number
 	 * @param img
 	 */
-	public Good(int Id, String name, float price, int number, String img) {
-		this.Id = Id;
+	public Good(int id, String name, float price, int number, String img) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.number = number;
@@ -34,7 +34,7 @@ public class Good {
 
 	public int getId() 
 	{
-		return this.Id;
+		return this.id;
 	}
 
 	public String getName() 
@@ -57,7 +57,7 @@ public class Good {
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public void setName(String name) {

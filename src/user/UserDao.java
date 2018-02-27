@@ -22,8 +22,9 @@ public class UserDao {
 			Statement stmt = conn.createStatement();
 			String sql = "select * from user where username='"+username+"'";
 			ResultSet rs = stmt.executeQuery(sql);
-			if(rs.next())
+			if(rs.next()) {
 				result = rs.getString("password");
+			}
 			conn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -43,8 +44,9 @@ public class UserDao {
 			Statement stmt = conn.createStatement();
 			String sql = "select * from user where username='"+username+"'";
 			ResultSet rs = stmt.executeQuery(sql);
-			if(rs.next())
+			if(rs.next()) {
 				id = rs.getString("id");
+			}
 			conn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
